@@ -1,3 +1,7 @@
+provider "aws" {
+  regison = "ap-northeast-1"
+}
+
 variable "vpc_name" {
   description = "VPCの名前"
   type        = string
