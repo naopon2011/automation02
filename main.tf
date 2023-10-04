@@ -109,7 +109,7 @@ resource "aws_instance" "example" {
   ami           = "ami-05b60713705a935c2"
   instance_type = "t3.medium" 
   subnet_id = aws_subnet.public_subnet.id
-  user_data = <<EOF
+  command = <<EOF
        #!/bin/bash
       #Stop the App Connector service which was auto-started at boot time
       systemctl stop zpa-connector
@@ -126,6 +126,7 @@ resource "aws_instance" "example" {
       systemctl stop zpa-connector
       systemctl start zpa-connector
       EOF
+  user_data = "${base64encode(command)}"
   key_name = "zsdemo"
   tags = {
     Name = "${var.vpc_name}-ec2"
