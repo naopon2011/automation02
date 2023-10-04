@@ -129,7 +129,7 @@ resource "aws_instance" "example" {
   ami           = "ami-05b60713705a935c2"
   instance_type = "t3.medium" 
   subnet_id = aws_subnet.public_subnet.id
-  user_data = base64encode(${local.command})
+  user_data = base64encode(local.command)
   key_name = "zsdemo"
   tags = {
     Name = "${var.vpc_name}-ec2"
