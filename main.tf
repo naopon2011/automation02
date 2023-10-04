@@ -7,7 +7,7 @@ variable "vpc_name" {
   type        = string
 }
 # VPCタグ
-resource "aws_vpc" "my_vpc" {
+resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
     Name = var.vpc_name
@@ -15,7 +15,7 @@ resource "aws_vpc" "my_vpc" {
 }
 # パブリックサブネットタグ
 resource "aws_subnet" "public_subnet" {
-  vpc_id            = aws_vpc.my_vpc.id
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.0.0/24"
   availability_zone = "ap-northeast-1a"
   tags = {
@@ -24,25 +24,32 @@ resource "aws_subnet" "public_subnet" {
 }
 # パブリックサブネット用ルートテーブルタグ
 resource "aws_route_table" "public_route_table" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = aws_vpc.vpc.id
   tags = {
     Name = "${var.vpc_name}-public-route-table"
   }
 }
 # プライベートサブネットタグ
-resource "aws_subnet" "private_subnet" {
-  count             = 2
-  vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.${count.index + 1}.0/24"
+resource "aws_subnet" "private_subnet1" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = "10.0.3.0/24"
   availability_zone = "ap-northeast-1a"
   tags = {
-    Name = "${var.vpc_name}-private-subnet${count.index + 1}"
+    Name = "${var.vpc_name}-private-subnet1"
+  }
+}
+resource "aws_subnet" "private_subnet2" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = "10.0.4.0/24"
+  availability_zone = "ap-northeast-1c"
+  tags = {
+    Name = "${var.vpc_name}-private-subnet2"
   }
 }
 
 # インターネットゲートウェイタグ
 resource "aws_internet_gateway" "my_igw" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = aws_vpc.vpc.id
   tags = {
     Name = "${var.vpc_name}-igw"
   }
@@ -57,7 +64,7 @@ resource "aws_route" "public_default_route" {
 
 #NATゲートウェイタグ
 resource "aws_nat_gateway" "my_nat_gateway" {
-  allocation_id = aws_eip.my_eip.id
+  allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public_subnet.id
   tags = {
     Name = "${var.vpc_name}-nat-gateway"
@@ -65,9 +72,34 @@ resource "aws_nat_gateway" "my_nat_gateway" {
 }
 
 # Elastic IPタグ
-resource "aws_eip" "my_eip" {
+resource "aws_eip" "eip" {
   vpc = true
   tags = {
     Name = "${var.vpc_name}-eip"
   }
 }
+
+resource "aws_instance" "example" {
+  ami           = "ami-08faa595250de3ee0"
+  instance_type = "t2.micro" 
+  user_data = <<EOF
+      #!/bin/bash
+      #Stop the App Connector service which was auto-started at boot time
+      systemctl stop zpa-connector
+      #Create a file from the App Connector provisioning key created in the ZPA Admin Portal
+      #Make sure that the provisioning key is between double quotes
+      echo "${var.provision_key}" > /opt/zscaler/var/provision_key
+      #Run a yum update to apply the latest patches
+      yum update -y
+      #Start the App Connector service to enroll it in the ZPA cloud
+      systemctl start zpa-connector
+      #Wait for the App Connector to download latest build
+      sleep 60
+      #Stop and then start the App Connector for the latest build
+      systemctl stop zpa-connector
+      systemctl start zpa-connector
+      EOF
+  key_name = "zsdemo"
+}
+
+
