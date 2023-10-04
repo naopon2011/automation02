@@ -22,6 +22,13 @@ resource "aws_subnet" "public_subnet" {
     Name = "${var.vpc_name}-public-subnet"
   }
 }
+# パブリックサブネット用ルートテーブルタグ
+resource "aws_route_table" "public_route_table" {
+  vpc_id = aws_vpc.my_vpc.id
+  tags = {
+    Name = "${var.vpc_name}-public-route-table"
+  }
+}
 # プライベートサブネットタグ
 resource "aws_subnet" "private_subnet" {
   count             = 2
@@ -48,7 +55,7 @@ resource "aws_route" "public_default_route" {
   gateway_id             = aws_internet_gateway.my_igw.id
 }
 
-# インターネットゲートウェイタグ
+#NATゲートウェイタグ
 resource "aws_nat_gateway" "my_nat_gateway" {
   allocation_id = aws_eip.my_eip.id
   subnet_id     = aws_subnet.public_subnet.id
