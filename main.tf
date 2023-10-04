@@ -87,6 +87,7 @@ resource "aws_eip" "eip" {
 resource "aws_instance" "example" {
   ami           = "ami-08faa595250de3ee0"
   instance_type = "t2.micro" 
+  subnet_id = aws_subnet.private_subnet1.id
   user_data = <<EOF
       #!/bin/bash
       #Stop the App Connector service which was auto-started at boot time
@@ -105,6 +106,9 @@ resource "aws_instance" "example" {
       systemctl start zpa-connector
       EOF
   key_name = "zsdemo"
+  tags = {
+    Name = "${var.vpc_name}-ec2"
+  }
 }
 
 
