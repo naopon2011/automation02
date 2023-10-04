@@ -107,7 +107,7 @@ resource "aws_route_table_association" "private_subnet_association" {
 
 locals {
   command = <<EOF
-      "${base64encode(}#!/bin/bash
+      "#!/bin/bash
       #Stop the App Connector service which was auto-started at boot time
       systemctl stop zpa-connector
       #Create a file from the App Connector provisioning key created in the ZPA Admin Portal
@@ -121,7 +121,7 @@ locals {
       sleep 60
       #Stop and then start the App Connector for the latest build
       systemctl stop zpa-connector
-      systemctl start zpa-connector${)}"
+      systemctl start zpa-connector"
       EOF
 }
 
