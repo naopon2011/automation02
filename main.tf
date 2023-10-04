@@ -86,7 +86,7 @@ resource "aws_eip" "eip" {
 
 resource "aws_instance" "example" {
   ami           = "ami-08faa595250de3ee0"
-  instance_type = "t2.micro" 
+  instance_type = "t3.medium" 
   subnet_id = aws_subnet.private_subnet1.id
   user_data = <<EOF
       #!/bin/bash
