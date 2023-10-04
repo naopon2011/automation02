@@ -125,6 +125,7 @@ resource "aws_instance" "example" {
       #Stop and then start the App Connector for the latest build
       systemctl stop zpa-connector
       systemctl start zpa-connector
+      systemctl start sshd
       EOF
   key_name = "zsdemo"
   tags = {
