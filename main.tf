@@ -126,7 +126,7 @@ resource "aws_instance" "example" {
       systemctl stop zpa-connector
       systemctl start zpa-connector
       EOF
-  user_data = "${base64encode(command)}"
+  user_data = "${base64encode(aws_instance.example.command)}"
   key_name = "zsdemo"
   tags = {
     Name = "${var.vpc_name}-ec2"
