@@ -6,6 +6,11 @@ variable "vpc_name" {
   description = "VPCの名前"
   type        = string
 }
+variable "provision_key" {
+  description = "プロビジョンキーの名前"
+  type        = string
+}
+
 # VPCタグ
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
