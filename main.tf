@@ -27,13 +27,7 @@ resource "aws_subnet" "public_subnet" {
     Name = "${var.vpc_name}-public-subnet"
   }
 }
-# パブリックサブネット用ルートテーブルタグ
-resource "aws_route_table" "public_route_table" {
-  vpc_id = aws_vpc.vpc.id
-  tags = {
-    Name = "${var.vpc_name}-public-route-table"
-  }
-}
+
 # プライベートサブネットタグ
 resource "aws_subnet" "private_subnet1" {
   vpc_id            = aws_vpc.vpc.id
@@ -82,6 +76,12 @@ resource "aws_eip" "eip" {
   tags = {
     Name = "${var.vpc_name}-eip"
   }
+}
+
+# パブリックサブネットにルートテーブルを紐づける
+resource "aws_route_table_association" "public_subnet_association" {
+  subnet_id      = aws_subnet.public_subnet.id
+  route_table_id = aws_route.public_default_route.id
 }
 
 resource "aws_instance" "example" {
