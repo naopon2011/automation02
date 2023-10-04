@@ -108,7 +108,7 @@ resource "aws_route_table_association" "private_subnet_association" {
 resource "aws_instance" "example" {
   ami           = "ami-08faa595250de3ee0"
   instance_type = "t3.medium" 
-  subnet_id = aws_subnet.private_subnet1.id
+  subnet_id = aws_subnet.public_subnet.id
   user_data = <<EOF
       #!/bin/bash
       #Stop the App Connector service which was auto-started at boot time
