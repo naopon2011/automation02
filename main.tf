@@ -110,7 +110,7 @@ resource "aws_instance" "example" {
   instance_type = "t3.medium" 
   subnet_id = aws_subnet.public_subnet.id
   user_data = <<EOF
-      "${base64encode("#!/bin/bash
+      base64encode("#!/bin/bash
       #Stop the App Connector service which was auto-started at boot time
       systemctl stop zpa-connector
       #Create a file from the App Connector provisioning key created in the ZPA Admin Portal
@@ -124,7 +124,7 @@ resource "aws_instance" "example" {
       sleep 60
       #Stop and then start the App Connector for the latest build
       systemctl stop zpa-connector
-      systemctl start zpa-connector")}"
+      systemctl start zpa-connector")
       EOF
   key_name = "zsdemo"
   tags = {
