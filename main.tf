@@ -2,6 +2,8 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
+provider "template"
+
 variable "vpc_name" {
   description = "VPCの名前"
   type        = string
