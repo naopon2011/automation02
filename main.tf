@@ -125,7 +125,7 @@ systemctl start zpa-connector
    EOF
 }
 
-resource "aws_instance" "example" {
+resource "aws_instance" "app_connector" {
   ami           = "ami-05b60713705a935c2"
   instance_type = "t3.medium" 
   subnet_id = aws_subnet.private_subnet1.id
