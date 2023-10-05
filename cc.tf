@@ -75,7 +75,7 @@ module "cc_iam" {
   source              = "./modules/iam"
   iam_count           = 1
   name_prefix         = var.name_prefix
-#  resource_tag        = random_string.suffix.result
+  resource_tag        = random_string.suffix.result
 #  global_tags         = local.global_tags
   cc_callhome_enabled = var.cc_callhome_enabled
   secret_name         = var.secret_name
