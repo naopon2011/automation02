@@ -60,7 +60,7 @@ resource "zpa_segment_group" "crm_app_group" {
 
 // Retrieve App Connector Group
 data "zpa_app_connector_group" "dc_connector_group" {
-  name = "SGIO-Vancouver"
+  name = "test"
 }
 
 provider "aws" {
