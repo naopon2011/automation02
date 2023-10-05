@@ -38,7 +38,7 @@ resource "aws_network_interface" "cc_vm_nic_index_1" {
 }
 
 locals {
-  command = <<EOF
+  cc_command = <<EOF
 [ZSCALER]
 CC_URL=${var.cc_vm_prov_url}
 SECRET_NAME=${var.secret_name}
