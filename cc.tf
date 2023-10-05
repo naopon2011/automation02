@@ -74,10 +74,10 @@ variable "http_probe_port" {
 module "cc_iam" {
   source              = "../../module/iam"
   iam_count           = 1
-#  name_prefix         = var.name_prefix
+  name_prefix         = var.name_prefix
 #  resource_tag        = random_string.suffix.result
 #  global_tags         = local.global_tags
-#  cc_callhome_enabled = var.cc_callhome_enabled
+  cc_callhome_enabled = var.cc_callhome_enabled
   secret_name         = var.secret_name
 }
 
