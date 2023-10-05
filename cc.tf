@@ -43,3 +43,35 @@ resource "aws_network_interface" "cc_vm_nic_index_1" {
     { Name = "${var.name_prefix}-cc-vm-${count.index + 1}-${var.resource_tag}-SrvcIF1" }
   )
 }
+
+locals {
+  command = <<EOF
+[ZSCALER]
+CC_URL=${var.cc_vm_prov_url}
+SECRET_NAME=${var.secret_name}
+HTTP_PROBE_PORT=${var.http_probe_port}
+   EOF
+}
+
+variable "cc_vm_prov_url" {
+  type        = string
+  description = "Zscaler Cloud Connector Provisioning URL"
+}
+
+variable "secret_name" {
+  type        = string
+  description = "AWS Secrets Manager Secret Name for Cloud Connector provisioning"
+}
+
+variable "http_probe_port" {
+  type        = number
+  description = "Port number for Cloud Connector cloud init to enable listener port for HTTP probe from GWLB Target Group"
+  default     = 50000
+  validation {
+    condition = (
+      tonumber(var.http_probe_port) == 80 ||
+      (tonumber(var.http_probe_port) >= 1024 && tonumber(var.http_probe_port) <= 65535)
+    )
+    error_message = "Input http_probe_port must be set to a single value of 80 or any number between 1024-65535."
+  }
+}
