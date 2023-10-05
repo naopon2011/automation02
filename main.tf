@@ -8,12 +8,19 @@ terraform {
 }
 provider "zpa" {}
 
-data "zpa_app_connector_controller" "example" {
-  name = "AWS-VPC100-App-Connector"
-}
-
-output "zpa_app_connector_controller" {
-  value = data.zpa_app_connector_controller.example
+resource "zpa_application_segment" "crm_application" {
+  name             = "CRM Application"
+  description      = "CRM Application"
+  enabled          = true
+  health_reporting = "ON_ACCESS"
+  bypass_type      = "NEVER"
+  is_cname_enabled = true
+  tcp_port_ranges  = ["80", "80"]
+  domain_names     = ["crm.example.com"]
+  segment_group_id = zpa_segment_group.crm_app_group.id
+  server_groups {
+    id = [zpa_server_group.crm_servers.id]
+  }
 }
 
 provider "aws" {
