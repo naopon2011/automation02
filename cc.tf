@@ -72,7 +72,7 @@ variable "http_probe_port" {
 
 
 module "cc_iam" {
-  source              = "../../iam"
+  source              = "../../module/iam"
   iam_count           = 1
 #  name_prefix         = var.name_prefix
 #  resource_tag        = random_string.suffix.result
