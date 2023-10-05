@@ -46,13 +46,14 @@ resource "aws_network_interface" "cc_vm_nic_index_1" {
 }
 
 locals {
-  cc_command = <<EOF
+  userdata = <<USERDATA
 [ZSCALER]
 CC_URL=${var.cc_vm_prov_url}
 SECRET_NAME=${var.secret_name}
 HTTP_PROBE_PORT=${var.http_probe_port}
-   EOF
+USERDATA
 }
+
 
 variable "cc_vm_prov_url" {
   type        = string
