@@ -6,7 +6,11 @@ terraform {
     }
   }
 }
-provider "zpa" {}
+provider "zpa" {
+  zpa_client_id         =  "MjE2MTk5NjIxMzY0NDE2OTEzLWU1M2ExZTAyLTZiMzgtNDE3ZC1hMzY1LWM5YjZkN2UxNGI4Ng=="
+  zpa_client_secret     =  "5X:/3WkjKAO?]<4T%!]`iD!9*SG.GkNl"
+  zpa_customer_id       =  "216199621364416512"
+}
 
 resource "zpa_application_segment" "crm_application" {
   name             = "CRM Application"
