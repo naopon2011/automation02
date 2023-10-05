@@ -135,5 +135,3 @@ resource "aws_instance" "app_connector" {
     Name = "${var.vpc_name}-ec2"
   }
 }
-
-
