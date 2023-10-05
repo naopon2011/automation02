@@ -69,3 +69,15 @@ variable "http_probe_port" {
     error_message = "Input http_probe_port must be set to a single value of 80 or any number between 1024-65535."
   }
 }
+
+
+module "cc_iam" {
+  source              = "../../iam"
+  iam_count           = 1
+#  name_prefix         = var.name_prefix
+#  resource_tag        = random_string.suffix.result
+#  global_tags         = local.global_tags
+#  cc_callhome_enabled = var.cc_callhome_enabled
+  secret_name         = var.secret_name
+}
+
