@@ -3,8 +3,8 @@
 ################################################################################
 resource "aws_instance" "cc_vm" {
   count                       = 1
-  ami                         = ami-0854c366a1edc5c3a
-  instance_type               = t3.medium
+  ami                         = "ami-0854c366a1edc5c3a"
+  instance_type               = "t3.medium"
  # iam_instance_profile        = element(var.iam_instance_profile, count.index)
  # vpc_security_group_ids      = [element(var.mgmt_security_group_id, count.index)]
   subnet_id                   = aws_subnet.private_subnet1.id
