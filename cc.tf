@@ -17,7 +17,7 @@ resource "aws_instance" "cc_vm" {
   subnet_id                   = aws_subnet.private_subnet1.id
   key_name                    = "zsdemo"
   associate_public_ip_address = false
-  user_data                   = base64encode(local.user_data)
+  user_data                   = base64encode(local.userdata)
 
   metadata_options {
     http_endpoint = "enabled"
