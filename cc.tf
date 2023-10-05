@@ -24,7 +24,8 @@ resource "aws_instance" "cc_vm" {
 # This interface becomes LB0 interface for Medium/Large size CCs
 ################################################################################
 resource "aws_network_interface" "cc_vm_nic_index_1" {
-  count             = local.valid_cc_create ? var.cc_count : 0
+#  count             = local.valid_cc_create ? var.cc_count : 0
+  count             = 1
 #  description       = var.cc_instance_size == "small" ? "Primary Interface for service traffic" : "CC Med/Lrg LB interface"
   subnet_id         = aws_subnet.private_subnet1.id
 # security_groups   = [element(var.service_security_group_id, count.index)]
