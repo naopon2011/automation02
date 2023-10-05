@@ -21,10 +21,6 @@ resource "zpa_application_segment" "crm_application" {
   is_cname_enabled = true
   tcp_port_ranges  = ["80", "80"]
   domain_names     = ["crm.example.com"]
-  segment_group_id = zpa_segment_group.crm_app_group.id
-  server_groups {
-    id = [zpa_server_group.crm_servers.id]
-  }
 }
 
 provider "aws" {
