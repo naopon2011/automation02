@@ -83,6 +83,29 @@ variable "http_probe_port" {
   }
 }
 
+# Create specified number of CC appliances
+module "cc_vm" {
+  source                    = "../../modules/terraform-zscc-ccvm-aws"
+  cc_count                  = var.cc_count
+  ami_id                    = contains(var.ami_id, "") ? [data.aws_ami.cloudconnector.id] : var.ami_id
+  name_prefix               = var.name_prefix
+  resource_tag              = random_string.suffix.result
+  global_tags               = local.global_tags
+  mgmt_subnet_id            = module.network.cc_subnet_ids
+  service_subnet_id         = module.network.cc_subnet_ids
+  instance_key              = aws_key_pair.deployer.key_name
+  user_data                 = local.userdata
+  ccvm_instance_type        = var.ccvm_instance_type
+  cc_instance_size          = var.cc_instance_size
+  iam_instance_profile      = module.cc_iam.iam_instance_profile_id
+  mgmt_security_group_id    = module.cc_sg.mgmt_security_group_id
+  service_security_group_id = module.cc_sg.service_security_group_id
+
+  depends_on = [
+    local_file.user_data_file,
+    null_resource.cc_error_checker,
+  ]
+}
 
 module "cc_iam" {
   source              = "./modules/iam"
