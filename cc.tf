@@ -4,6 +4,11 @@ resource "random_string" "suffix" {
   special = false
 }
 
+variable "iam_instance_profile" {
+  type        = list(string)
+  description = "IAM instance profile ID assigned to Cloud Connector"
+}
+
 
 ################################################################################
 # Create Cloud Connector VM
