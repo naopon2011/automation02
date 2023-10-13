@@ -30,9 +30,6 @@ resource "aws_instance" "cc_vm" {
     http_tokens   = var.imdsv2_enabled ? "required" : "optional"
   }
 
-  tags = merge(var.global_tags,
-    { Name = "${var.name_prefix}-cc-vm-${count.index + 1}-${var.resource_tag}" }
-  )
 }
 
 
@@ -52,9 +49,6 @@ resource "aws_network_interface" "cc_vm_nic_index_1" {
     device_index = 1
   }
 
-  tags = merge(var.global_tags,
-    { Name = "${var.name_prefix}-cc-vm-${count.index + 1}-${var.resource_tag}-SrvcIF1" }
-  )
 }
 
 
@@ -73,9 +67,6 @@ resource "aws_network_interface" "cc_vm_nic_index_2" {
     device_index = 2
   }
 
-  tags = merge(var.global_tags,
-    { Name = "${var.name_prefix}-cc-vm-${count.index + 1}-${var.resource_tag}-SrvcIF-2" }
-  )
 }
 
 
@@ -94,9 +85,6 @@ resource "aws_network_interface" "cc_vm_nic_index_3" {
     device_index = 3
   }
 
-  tags = merge(var.global_tags,
-    { Name = "${var.name_prefix}-cc-vm-${count.index + 1}-${var.resource_tag}-SrvcIF-3" }
-  )
 }
 
 
@@ -115,7 +103,4 @@ resource "aws_network_interface" "cc_vm_nic_index_4" {
     device_index = 4
   }
 
-  tags = merge(var.global_tags,
-    { Name = "${var.name_prefix}-cc-vm-${count.index + 1}-${var.resource_tag}-SrvcIF-4" }
-  )
 }
