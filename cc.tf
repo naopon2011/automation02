@@ -37,10 +37,6 @@ module "cc_vm" {
   mgmt_security_group_id    = module.cc_sg.mgmt_security_group_id
   service_security_group_id = module.cc_sg.service_security_group_id
 
-  depends_on = [
-    local_file.user_data_file,
-    null_resource.cc_error_checker,
-  ]
 }
 
 ################################################################################
