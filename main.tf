@@ -178,6 +178,17 @@ resource "random_string" "suffix" {
 ##    http_tokens   = var.imdsv2_enabled ? "required" : "optional"
 #  }
 #}
+
+
+locals {
+  userdata = <<USERDATA
+[ZSCALER]
+CC_URL=${var.cc_vm_prov_url}
+SECRET_NAME=${var.secret_name}
+HTTP_PROBE_PORT=${var.http_probe_port}
+USERDATA
+}
+
 module "cc_vm" {
   source                    = "./modules/terraform-zscc-ccvm-aws"
 #  cc_count                  = var.cc_count
@@ -194,15 +205,6 @@ module "cc_vm" {
 #  service_security_group_id = module.cc_sg.service_security_group_id
    mgmt_security_group_id    = aws_security_group.sg.id
   service_security_group_id = aws_security_group.sg.id
-}
-
-locals {
-  userdata = <<USERDATA
-[ZSCALER]
-CC_URL=${var.cc_vm_prov_url}
-SECRET_NAME=${var.secret_name}
-HTTP_PROBE_PORT=${var.http_probe_port}
-USERDATA
 }
 
 
