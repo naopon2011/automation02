@@ -20,8 +20,8 @@ resource "aws_instance" "cc_vm" {
   ami                         = var.ami_id
   instance_type               = var.ccvm_instance_type
   iam_instance_profile        = element(var.iam_instance_profile, count.index)
-  vpc_security_group_ids      = [element(var.mgmt_security_group_id, count.index)]
-  subnet_id                   = element(var.mgmt_subnet_id, count.index)
+  vpc_security_group_ids      = var.mgmt_security_group_id
+  subnet_id                   = var.mgmt_subnet_id
   key_name                    = var.instance_key
   associate_public_ip_address = false
   user_data                   = base64encode(var.user_data)
