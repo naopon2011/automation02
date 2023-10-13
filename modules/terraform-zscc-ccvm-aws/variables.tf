@@ -17,12 +17,14 @@ variable "global_tags" {
 }
 
 variable "mgmt_subnet_id" {
-  type        = list(string)
+ # type        = list(string)
+  type = string
   description = "Cloud Connector EC2 Instance management subnet id"
 }
 
 variable "service_subnet_id" {
-  type        = list(string)
+  # type        = list(string)
+  type = string
   description = "Cloud Connector EC2 Instance service subnet id"
 }
 
@@ -89,12 +91,14 @@ variable "cc_instance_size" {
 }
 
 variable "mgmt_security_group_id" {
-  type        = list(string)
+ # type        = list(string)
+  type = string
   description = "Cloud Connector EC2 Instance management subnet id"
 }
 
 variable "service_security_group_id" {
-  type        = list(string)
+ # type        = list(string)
+  type = string
   description = "Cloud Connector EC2 Instance service subnet id"
 }
 
