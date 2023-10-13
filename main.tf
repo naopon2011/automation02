@@ -186,7 +186,8 @@ module "cc_vm" {
   mgmt_subnet_id            = aws_subnet.public_subnet.id
   service_subnet_id         = aws_subnet.public_subnet.id
   instance_key              = "zsdemo"
-  user_data                 = base64encode(local.userdata)
+ # user_data                 = base64encode(local.userdata)
+  user_data                 = local.userdata
   ccvm_instance_type        = "t3.medium"
   iam_instance_profile      = module.cc_iam.iam_instance_profile_id
 #  mgmt_security_group_id    = module.cc_sg.mgmt_security_group_id
