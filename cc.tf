@@ -7,23 +7,40 @@ resource "random_string" "suffix" {
 ################################################################################
 # Create Cloud Connector VM
 ################################################################################
-resource "aws_instance" "cc_vm" {
-  count                       = 1
-  ami                         = "ami-0854c366a1edc5c3a"
-  instance_type               = "t3.medium"
-  iam_instance_profile        = element(var.iam_instance_profile, count.index)
- # iam_instance_profile        = module.cc_iam.iam_instance_profile_id
- # vpc_security_group_ids      = [element(var.mgmt_security_group_id, count.index)]
-  subnet_id                   = aws_subnet.private_subnet1.id
-  key_name                    = "zsdemo"
-  associate_public_ip_address = false
-  user_data                   = base64encode(local.userdata)
+#resource "aws_instance" "cc_vm" {
+#  count                       = 1
+#  ami                         = "ami-0854c366a1edc5c3a"
+#  instance_type               = "t3.medium"
+#  iam_instance_profile        = element(var.iam_instance_profile, count.index)
+# # iam_instance_profile        = module.cc_iam.iam_instance_profile_id
+# # vpc_security_group_ids      = [element(var.mgmt_security_group_id, count.index)]
+#  subnet_id                   = aws_subnet.private_subnet1.id
+#  key_name                    = "zsdemo"
+#  associate_public_ip_address = false
+#  user_data                   = base64encode(local.userdata)
 
-  metadata_options {
-    http_endpoint = "enabled"
-#    http_tokens   = var.imdsv2_enabled ? "required" : "optional"
-  }
+ # metadata_options {
+#    http_endpoint = "enabled"
+##    http_tokens   = var.imdsv2_enabled ? "required" : "optional"
+#  }
+#}
+module "cc_vm" {
+  source                    = "./modules/terraform-zscc-ccvm-aws"
+  cc_count                  = var.cc_count
+  ami_id                    = "ami-0854c366a1edc5c3a"
+  service_subnet_id         = aws_subnet.private_subnet1.id
+  user_data                 = base64encode(local.userdata)
+  ccvm_instance_type        = "t3.medium"
+  iam_instance_profile      = module.cc_iam.iam_instance_profile_id
+  mgmt_security_group_id    = module.cc_sg.mgmt_security_group_id
+  service_security_group_id = module.cc_sg.service_security_group_id
+
+  depends_on = [
+    local_file.user_data_file,
+    null_resource.cc_error_checker,
+  ]
 }
+
 
 
 ################################################################################
