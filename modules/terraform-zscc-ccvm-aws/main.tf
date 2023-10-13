@@ -108,7 +108,7 @@ resource "aws_network_interface" "cc_vm_nic_index_4" {
   count             = local.valid_cc_create && var.cc_instance_size == "large" ? var.cc_count : 0
   description       = "CC Service 3 interface"
   subnet_id         = var.service_subnet_id
-  security_groups   = var.service_security_group_id
+  security_groups   = var.security_group
   source_dest_check = false
   attachment {
     instance     = aws_instance.cc_vm[count.index].id
