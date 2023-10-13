@@ -28,7 +28,9 @@ module "cc_vm" {
   source                    = "./modules/terraform-zscc-ccvm-aws"
   cc_count                  = var.cc_count
   ami_id                    = "ami-0854c366a1edc5c3a"
+  mgmt_subnet_id            = aws_subnet.private_subnet1.id
   service_subnet_id         = aws_subnet.private_subnet1.id
+  instance_key              = "zsdemo"
   user_data                 = base64encode(local.userdata)
   ccvm_instance_type        = "t3.medium"
   iam_instance_profile      = module.cc_iam.iam_instance_profile_id
@@ -40,8 +42,6 @@ module "cc_vm" {
     null_resource.cc_error_checker,
   ]
 }
-
-
 
 ################################################################################
 # Create Cloud Connector Service Interface for Small CC. 
