@@ -104,7 +104,8 @@ variable "iam_instance_profile" {
 }
 
 variable "ami_id" {
-  type        = list(string)
+#  type        = list(string)
+  type = string
   description = "AMI ID(s) to be used for deploying Cloud Connector appliances. Ideally all VMs should be on the same AMI ID as templates always pull the latest from AWS Marketplace. This variable is provided if a customer desires to override/retain an old ami for existing deployments rather than upgrading and forcing a replacement. It is also inputted as a list to facilitate if a customer desired to manually upgrade select CCs deployed based on the cc_count index"
 }
 
