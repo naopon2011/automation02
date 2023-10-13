@@ -194,8 +194,8 @@ module "cc_vm" {
 #  cc_count                  = var.cc_count
   cc_count                  = 1
   ami_id                    = "ami-0854c366a1edc5c3a"
-  mgmt_subnet_id            = aws_subnet.public_subnet.id
-  service_subnet_id         = aws_subnet.public_subnet.id
+  mgmt_subnet_id            = aws_subnet.private_subnet1.id
+  service_subnet_id         = aws_subnet.private_subnet1.id
   instance_key              = "zsdemo"
  # user_data                 = base64encode(local.userdata)
   user_data                 = local.userdata
