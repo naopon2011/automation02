@@ -44,7 +44,7 @@ resource "aws_network_interface" "cc_vm_nic_index_1" {
   count             = local.valid_cc_create ? var.cc_count : 0
   description       = var.cc_instance_size == "small" ? "Primary Interface for service traffic" : "CC Med/Lrg LB interface"
   subnet_id         = var.service_subnet_id
-  security_groups   = var.service_security_group_id
+#  security_groups   = var.service_security_group_id
   source_dest_check = false
   private_ips_count = 1
   attachment {
@@ -66,7 +66,7 @@ resource "aws_network_interface" "cc_vm_nic_index_2" {
   count             = local.valid_cc_create && var.cc_instance_size != "small" ? var.cc_count : 0
   description       = "CC Service 1 interface"
   subnet_id         = var.service_subnet_id
-  security_groups   = var.service_security_group_id
+#  security_groups   = var.service_security_group_id
   source_dest_check = false
   attachment {
     instance     = aws_instance.cc_vm[count.index].id
@@ -87,7 +87,7 @@ resource "aws_network_interface" "cc_vm_nic_index_3" {
   count             = local.valid_cc_create && var.cc_instance_size != "small" ? var.cc_count : 0
   description       = "CC Service 2 interface"
   subnet_id         = var.service_subnet_id
-  security_groups   = var.service_security_group_id
+#  security_groups   = var.service_security_group_id
   source_dest_check = false
   attachment {
     instance     = aws_instance.cc_vm[count.index].id
@@ -108,7 +108,7 @@ resource "aws_network_interface" "cc_vm_nic_index_4" {
   count             = local.valid_cc_create && var.cc_instance_size == "large" ? var.cc_count : 0
   description       = "CC Service 3 interface"
   subnet_id         = var.service_subnet_id
-  security_groups   = var.service_security_group_id
+#  security_groups   = var.service_security_group_id
   source_dest_check = false
   attachment {
     instance     = aws_instance.cc_vm[count.index].id
