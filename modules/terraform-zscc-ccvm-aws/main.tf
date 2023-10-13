@@ -65,8 +65,8 @@ resource "aws_network_interface" "cc_vm_nic_index_1" {
 resource "aws_network_interface" "cc_vm_nic_index_2" {
   count             = local.valid_cc_create && var.cc_instance_size != "small" ? var.cc_count : 0
   description       = "CC Service 1 interface"
-  subnet_id         = element(var.service_subnet_id, count.index)
-  security_groups   = [element(var.service_security_group_id, count.index)]
+  subnet_id         = var.service_subnet_id
+  security_groups   = var.service_security_group_id
   source_dest_check = false
   attachment {
     instance     = aws_instance.cc_vm[count.index].id
@@ -86,8 +86,8 @@ resource "aws_network_interface" "cc_vm_nic_index_2" {
 resource "aws_network_interface" "cc_vm_nic_index_3" {
   count             = local.valid_cc_create && var.cc_instance_size != "small" ? var.cc_count : 0
   description       = "CC Service 2 interface"
-  subnet_id         = element(var.service_subnet_id, count.index)
-  security_groups   = [element(var.service_security_group_id, count.index)]
+  subnet_id         = var.service_subnet_id
+  security_groups   = var.service_security_group_id
   source_dest_check = false
   attachment {
     instance     = aws_instance.cc_vm[count.index].id
@@ -107,8 +107,8 @@ resource "aws_network_interface" "cc_vm_nic_index_3" {
 resource "aws_network_interface" "cc_vm_nic_index_4" {
   count             = local.valid_cc_create && var.cc_instance_size == "large" ? var.cc_count : 0
   description       = "CC Service 3 interface"
-  subnet_id         = element(var.service_subnet_id, count.index)
-  security_groups   = [element(var.service_security_group_id, count.index)]
+  subnet_id         = var.service_subnet_id
+  security_groups   = var.service_security_group_id
   source_dest_check = false
   attachment {
     instance     = aws_instance.cc_vm[count.index].id
