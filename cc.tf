@@ -26,7 +26,8 @@ resource "random_string" "suffix" {
 #}
 module "cc_vm" {
   source                    = "./modules/terraform-zscc-ccvm-aws"
-  cc_count                  = var.cc_count
+#  cc_count                  = var.cc_count
+  cc_count                  = 1
   ami_id                    = "ami-0854c366a1edc5c3a"
   mgmt_subnet_id            = aws_subnet.private_subnet1.id
   service_subnet_id         = aws_subnet.private_subnet1.id
