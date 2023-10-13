@@ -85,7 +85,7 @@ variable "http_probe_port" {
 }
 
 module "cc_iam" {
-  source              = "./modules/iam"
+  source              = "./modules/terraform-zscc-iam-aws"
   iam_count           = 1
   name_prefix         = var.name_prefix
   resource_tag        = random_string.suffix.result
