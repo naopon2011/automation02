@@ -18,7 +18,7 @@ variable "az1_name" {
 variable "ac_ami" {
   description = "Cloud Connectorのami"
   type        = string
-  default     = "ami-0854c366a1edc5c3a"
+  default     = "ami-05b60713705a935c2"
 }
 
 variable "ac_instance_type" {
