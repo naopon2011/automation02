@@ -39,9 +39,6 @@ resource "zpa_server_group" "win_servers" {
   app_connector_groups {
     id = [data.zpa_app_connector_group.dc_connector_group.id]
   }
-  servers {
-    id = [zpa_application_server.win_app_server.id]
-  }
 }
 
 // Create Application Server
