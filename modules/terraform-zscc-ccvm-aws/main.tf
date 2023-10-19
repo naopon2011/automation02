@@ -14,7 +14,7 @@ EOF
 # Create Cloud Connector VM
 ################################################################################
 resource "aws_instance" "cc_vm" {
-  count                       = local.valid_cc_create ? var.cc_count : 0
+#  count                       = local.valid_cc_create ? var.cc_count : 0
   ami                         = var.ami_id
   instance_type               = var.ccvm_instance_type
   iam_instance_profile        = element(var.iam_instance_profile, count.index)
