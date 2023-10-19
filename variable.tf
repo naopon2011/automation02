@@ -15,14 +15,19 @@ variable "az1_name" {
   default     = "ap-northeast-1a"
 }
 
+variable "instance_key" {
+  description = "インスタンス接続用のシークレットキー名"
+  type        = string
+}
+
 variable "ac_ami" {
-  description = "Cloud Connectorのami"
+  description = "App Connectorのami"
   type        = string
   default     = "ami-05b60713705a935c2"
 }
 
 variable "ac_instance_type" {
-  description = "Cloud Connectorのinstance type"
+  description = "App Connectorのinstance type"
   type        = string
   default     = "t3.medium"
 }
