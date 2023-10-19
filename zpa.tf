@@ -57,7 +57,6 @@ resource "zpa_segment_group" "win_app_group" {
   name            = "Win App group created by terraform"
   description     = "Win App group created by terraform"
   enabled         = true
-  policy_migrated = true
 }
 
 resource "zpa_policy_access_rule" "windows_access_policy" {
