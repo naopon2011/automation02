@@ -1,3 +1,9 @@
+variable "aws_region" {
+  type        = string
+  description = "The AWS region."
+  default     = "ap-northeast-1"
+}
+
 variable "name_prefix" {
   type        = string
   description = "The name prefix for all your resources"
