@@ -9,6 +9,11 @@ variable "vpc_name" {
   type        = string
 }
 
+variable "az1_name" {
+  description = "一つ目のavailability zone"
+  type        = string
+}
+
 variable "provision_key" {
   description = "プロビジョンキーの名前"
   type        = string
