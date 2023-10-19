@@ -1,7 +1,7 @@
 #App Connectorの作成
 resource "aws_instance" "app_connector" {
-  ami           = "ami-05b60713705a935c2"
-  instance_type = "t3.medium" 
+  ami           = var.ac_ami
+  instance_type = var.ac_instance_type
   subnet_id = aws_subnet.private_subnet1.id
   user_data = base64encode(local.command)
   key_name = "zsdemo"
