@@ -76,7 +76,6 @@ locals {
 resource "zpa_policy_access_rule_reorder" "access_policy_reorder" {
   policy_type   = "ACCESS_POLICY"
   dynamic "rules" {
-    for_each = 1
     content {
       id    = rules.value.id
       order = rules.value.order
