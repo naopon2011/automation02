@@ -47,7 +47,7 @@ resource "zpa_server_group" "crm_servers" {
 resource "zpa_application_server" "win_app_server" {
   name        = "Win App Server created by terraform"
   description = "Win App Server created by terraform"
-  address     = "crm.example.com"
+  address     = aws_instance.windows.private_dns
   enabled     = true
 }
 
