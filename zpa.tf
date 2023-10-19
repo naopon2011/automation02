@@ -14,18 +14,18 @@ provider "zpa" {
 }
 
 // Create Application Segment
-resource "zpa_application_segment" "crm_application" {
-  name             = "CRM Application"
-  description      = "CRM Application"
+resource "zpa_application_segment" "windows" {
+  name             = "windows_created_by_terraform"
+  description      = "windows_created_by_terraform"
   enabled          = true
   health_reporting = "ON_ACCESS"
   bypass_type      = "NEVER"
   is_cname_enabled = true
-  tcp_port_ranges  = ["80", "80"]
+  tcp_port_ranges  = ["3389", "3389"]
   domain_names     = ["${aws_instance.app_connector.private_dns}"]
-  segment_group_id = zpa_segment_group.crm_app_group.id
+  segment_group_id = zpa_segment_group.win_app_group.id
   server_groups {
-    id = [zpa_server_group.crm_servers.id]
+    id = [zpa_server_group.win_servers.id]
   }
 }
 
@@ -44,17 +44,17 @@ resource "zpa_server_group" "crm_servers" {
 }
 
 // Create Application Server
-resource "zpa_application_server" "crm_app_server" {
-  name        = "CRM App Server"
-  description = "CRM App Server"
+resource "zpa_application_server" "win_app_server" {
+  name        = "Win App Server created by terraform"
+  description = "Win App Server created by terraform"
   address     = "crm.example.com"
   enabled     = true
 }
 
 // Create Segment Group
-resource "zpa_segment_group" "crm_app_group" {
-  name            = "CRM App group"
-  description     = "CRM App group"
+resource "zpa_segment_group" "win_app_group" {
+  name            = "Win App group created by terraform"
+  description     = "Win App group created by terraform"
   enabled         = true
   policy_migrated = true
 }
