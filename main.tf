@@ -29,7 +29,7 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
-# プライベートサブネットの作成
+# Zscalerリソース用プライベートサブネットの作成
 resource "aws_subnet" "private_subnet1" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.3.0/24"
@@ -38,6 +38,8 @@ resource "aws_subnet" "private_subnet1" {
     Name = "${var.vpc_name}-private-subnet1"
   }
 }
+
+# CC送信元用プライベートサブネットの作成
 resource "aws_subnet" "private_subnet2" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.4.0/24"
@@ -85,7 +87,16 @@ resource "aws_route_table_association" "public_subnet_association" {
   route_table_id = aws_route_table.public_route_table.id
 }
 
-# プライベートサブネット用ルートテーブルの作成
+# Zscalerリソース用プライベートサブネットのルートテーブルの作成
+resource "aws_route_table" "private_route_table" {
+  vpc_id = aws_vpc.vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.nat_gateway.id
+  }
+}
+
+# CC送信元用プライベートサブネットのルートテーブルの作成
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
   route {
