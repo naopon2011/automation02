@@ -70,7 +70,7 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
 locals {
   rule_orders = [
     #description[ access policy rule id, order number ]
-    [ zpa_policy_access_rule.windows_access_policy.id, 3 ]
+    [ zpa_policy_access_rule.windows_access_policy.id, "3" ]
   ]
 }
 
