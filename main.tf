@@ -193,30 +193,6 @@ module "cc_vm" {
   service_security_group_id = aws_security_group.sg.id
 }
 
-
-variable "cc_vm_prov_url" {
-  type        = string
-  description = "Zscaler Cloud Connector Provisioning URL"
-}
-
-variable "secret_name" {
-  type        = string
-  description = "AWS Secrets Manager Secret Name for Cloud Connector provisioning"
-}
-
-variable "http_probe_port" {
-  type        = number
-  description = "Port number for Cloud Connector cloud init to enable listener port for HTTP probe from GWLB Target Group"
-  default     = 50000
-  validation {
-    condition = (
-      tonumber(var.http_probe_port) == 80 ||
-      (tonumber(var.http_probe_port) >= 1024 && tonumber(var.http_probe_port) <= 65535)
-    )
-    error_message = "Input http_probe_port must be set to a single value of 80 or any number between 1024-65535."
-  }
-}
-
 module "cc_iam" {
   source              = "./modules/terraform-zscc-iam-aws"
   iam_count           = 1
