@@ -74,7 +74,6 @@ locals {
 }
 
 resource "zpa_policy_access_rule_reorder" "access_policy_reorder" {
-
   policy_type   = "ACCESS_POLICY"
 
   dynamic "rules" {
