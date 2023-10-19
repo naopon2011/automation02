@@ -1,14 +1,5 @@
 provider "aws" {
-  region = "ap-northeast-1"
-}
-
-variable "vpc_name" {
-  description = "VPCの名前"
-  type        = string
-}
-variable "provision_key" {
-  description = "プロビジョンキーの名前"
-  type        = string
+  region = var.aws_region
 }
 
 # VPCタグ
