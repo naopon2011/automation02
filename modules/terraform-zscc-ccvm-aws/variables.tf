@@ -118,8 +118,3 @@ variable "imdsv2_enabled" {
   description = "true/false whether to force IMDSv2 only for instance bring up. Default is true"
   default     = true
 }
-
-variable "tag" {
-  type = string
-  description = "タグ名"
-}
