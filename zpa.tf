@@ -21,18 +21,14 @@ resource "zpa_application_segment" "windows" {
   health_reporting = "ON_ACCESS"
   bypass_type      = "NEVER"
   is_cname_enabled = true
-　　　　tcp_port_range = [
-    {
+　　　　tcp_port_range = {
     from = "3389"
     to = "3389"
     }
-  ]
-  udp_port_range = [
-    {
+  udp_port_range = {
     from = "3389"
     to = "3389"
     }
-  ]
   domain_names     = ["${aws_instance.windows.private_dns}"]
   segment_group_id = zpa_segment_group.win_app_group.id
   server_groups {
