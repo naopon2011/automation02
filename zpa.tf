@@ -54,6 +54,7 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
   action                        = "ALLOW"
   operator = "AND"
   policy_set_id = data.zpa_policy_type.access_policy.id
+  rule_order = "2"
 
   conditions {
     negated = false
