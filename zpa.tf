@@ -30,16 +30,16 @@ resource "zpa_application_segment" "windows" {
 }
 
 // Create Server Group
-resource "zpa_server_group" "crm_servers" {
-  name              = "CRM Servers"
-  description       = "CRM Servers"
+resource "zpa_server_group" "win_servers" {
+  name              = "Win Servers"
+  description       = "Win Servers"
   enabled           = true
   dynamic_discovery = false
   app_connector_groups {
     id = [data.zpa_app_connector_group.dc_connector_group.id]
   }
   servers {
-    id = [zpa_application_server.crm_app_server.id]
+    id = [zpa_application_server.win_app_server.id]
   }
 }
 
