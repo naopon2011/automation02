@@ -23,9 +23,9 @@ resource "aws_instance" "cc_vm" {
   key_name                    = var.instance_key
   associate_public_ip_address = false
   user_data                   = base64encode(var.user_data)
-　　　　tags = {
-    Name = "${var.vpc_name}-cc"
-  }
+　#　　　tags = {
+#    Name = "${var.vpc_name}-cc"
+#  }
 
   metadata_options {
     http_endpoint = "enabled"
