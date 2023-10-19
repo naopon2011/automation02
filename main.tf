@@ -13,7 +13,7 @@ resource "aws_vpc" "vpc" {
 resource "aws_subnet" "public_subnet" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.0.0/24"
-  availability_zone = "ap-northeast-1a"
+  availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-public-subnet"
   }
@@ -31,7 +31,7 @@ resource "aws_route_table" "public_route_table" {
 resource "aws_subnet" "private_subnet1" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.3.0/24"
-  availability_zone = "ap-northeast-1a"
+  availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-private-subnet1"
   }
@@ -39,7 +39,7 @@ resource "aws_subnet" "private_subnet1" {
 resource "aws_subnet" "private_subnet2" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.4.0/24"
-  availability_zone = "ap-northeast-1c"
+  availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-private-subnet2"
   }
@@ -137,11 +137,6 @@ resource "aws_instance" "app_connector" {
     Name = "${var.vpc_name}-ec2"
   }
 }
-
-
-
-
-
 
 resource "random_string" "suffix" {
   length  = 8
