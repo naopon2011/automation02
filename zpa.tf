@@ -64,17 +64,17 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
   name                          = "Access policy created by terraform"
   description                   = "Access policy created by terraform"
   action                        = "ALLOW"
-#  operator = "AND"
-#  policy_set_id = data.zpa_policy_type.access_policy.id
+  operator = "AND"
+  policy_set_id = data.zpa_policy_type.access_policy.id
 
   conditions {
     negated = false
     operator = "OR"
     operands {
       name =  "Example"
-      object_type = "APP"
+      object_type = "APP_GROUP"
       lhs = "id"
-      rhs = data.zpa_application_segment.win_seg.id
+      rhs = zpa_segment_group.win_app_group.id
     }
   }
 }
@@ -84,8 +84,6 @@ data "zpa_app_connector_group" "dc_connector_group" {
   name = "test"
 }
 
-// Retrieve Application Segument
-data "zpa_application_segment" "win_seg"{
-  name = "Win App group created by terraform"
+data "zpa_policy_type" "access_policy" {
+    policy_type = "ACCESS_POLICY"
 }
-
