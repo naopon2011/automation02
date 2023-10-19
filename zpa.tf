@@ -70,8 +70,10 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
 
 resource "zpa_policy_access_rule_reorder" "access_policy_reorder" {
   policy_type   = "ACCESS_POLICY"
+  contents {
       id    = zpa_policy_access_rule.windows_access_policy.id
       order = 2
+   }
 }
 
 // Retrieve App Connector Group
