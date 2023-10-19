@@ -19,7 +19,7 @@ module "cc_vm" {
   ami_id                    = var.cc_ami
   mgmt_subnet_id            = aws_subnet.private_subnet1.id
   service_subnet_id         = aws_subnet.private_subnet1.id
-  instance_key              = "zsdemo"
+  instance_key              = var.instance_key
   user_data                 = local.userdata
   ccvm_instance_type        = var.cc_instance_type
   iam_instance_profile      = module.cc_iam.iam_instance_profile_id
