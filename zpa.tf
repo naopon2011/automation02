@@ -67,10 +67,21 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
   }
 }
 
+locals {
+  rule_orders = [
+    { id = zpa_policy_access_rule.windows_access_policy.id, order = 2 }
+  ]
+}
+
 resource "zpa_policy_access_rule_reorder" "access_policy_reorder" {
   policy_type   = "ACCESS_POLICY"
-  rules.id = zpa_policy_access_rule.windows_access_policy.id
-  rules.order = 2
+  dynamic "rules" {
+    for_each = 1
+    content {
+      id    = rules.value.id
+      order = rules.value.order
+    }
+  }
 }
 
 // Retrieve App Connector Group
