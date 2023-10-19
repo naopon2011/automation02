@@ -1,7 +1,17 @@
 variable "aws_region" {
   type        = string
-  description = "The AWS region."
+  description = "AWSのリージョン"
   default     = "ap-northeast-1"
+}
+
+variable "vpc_name" {
+  description = "VPCの名前"
+  type        = string
+}
+
+variable "provision_key" {
+  description = "プロビジョンキーの名前"
+  type        = string
 }
 
 variable "name_prefix" {
