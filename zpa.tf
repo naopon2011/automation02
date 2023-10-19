@@ -41,14 +41,6 @@ resource "zpa_server_group" "win_servers" {
   }
 }
 
-// Create Application Server
-resource "zpa_application_server" "win_app_server" {
-  name        = "Win App Server created by terraform"
-  description = "Win App Server created by terraform"
-  address     = aws_instance.windows.private_dns
-  enabled     = true
-}
-
 // Create Segment Group
 resource "zpa_segment_group" "win_app_group" {
   name            = "Win App group created by terraform"
