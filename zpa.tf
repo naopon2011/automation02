@@ -74,8 +74,8 @@ locals {
 }
 
 resource "zpa_policy_access_rule_reorder" "access_policy_reorder" {
-  policy_set_id = data.zpa_policy_type.access_policy.id
-  policy_type   = "ACCESS_POLICY"
+#  policy_set_id = data.zpa_policy_type.access_policy.id
+#  policy_type   = "ACCESS_POLICY"
 
   dynamic "rules" {
     for_each = local.rule_orders
