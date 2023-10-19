@@ -15,7 +15,6 @@ EOF
 ################################################################################
 resource "aws_instance" "cc_vm" {
   count                       = local.valid_cc_create ? var.cc_count : 0
-#  ami                         = element(var.ami_id, count.index)
   ami                         = var.ami_id
   instance_type               = var.ccvm_instance_type
   iam_instance_profile        = element(var.iam_instance_profile, count.index)
@@ -24,6 +23,9 @@ resource "aws_instance" "cc_vm" {
   key_name                    = var.instance_key
   associate_public_ip_address = false
   user_data                   = base64encode(var.user_data)
+　　　　tags = {
+    Name = "${var.vpc_name}-cc"
+  }
 
   metadata_options {
     http_endpoint = "enabled"
