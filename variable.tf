@@ -16,7 +16,7 @@ variable "az1_name" {
 }
 
 variable "provision_key" {
-  description = "プロビジョンキーの名前"
+  description = "App Connector用のProvisioning Keyの名前"
   type        = string
 }
 
