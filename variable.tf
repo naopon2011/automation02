@@ -15,6 +15,18 @@ variable "az1_name" {
   default     = "ap-northeast-1a"
 }
 
+variable "ac_ami" {
+  description = "Cloud Connectorのami"
+  type        = string
+  default     = "ami-0854c366a1edc5c3a"
+}
+
+variable "ac_instance_type" {
+  description = "Cloud Connectorのinstance type"
+  type        = string
+  default     = "t3.medium"
+}
+
 variable "cc_ami" {
   description = "Cloud Connectorのami"
   type        = string
