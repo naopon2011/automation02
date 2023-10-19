@@ -70,8 +70,31 @@ resource "zpa_segment_group" "win_app_group" {
   policy_migrated = true
 }
 
+resource "zpa_policy_access_rule" "windows_access_policy" {
+  name                          = "Access policy created by terraform"
+  description                   = "Access policy created by terraform"
+  action                        = "ALLOW"
+#  operator = "AND"
+#  policy_set_id = data.zpa_policy_type.access_policy.id
+
+  conditions {
+    negated = false
+    operator = "OR"
+    operands {
+      name =  "Example"
+      object_type = "APP"
+      lhs = "id"
+      rhs = data.zpa_application_segment.win_seg.id
+    }
+  }
+
 // Retrieve App Connector Group
 data "zpa_app_connector_group" "dc_connector_group" {
   name = "test"
+}
+
+// Retrieve Application Segument
+data "zpa_application_segment" "win_seg"{
+  name = "Win App group created by terraform"
 }
 
