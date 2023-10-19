@@ -4,9 +4,9 @@ resource "aws_instance" "app_connector" {
   instance_type = var.ac_instance_type
   subnet_id = aws_subnet.private_subnet1.id
   user_data = base64encode(local.command)
-  key_name = "zsdemo"
+  key_name = var.instance_key
   tags = {
-    Name = "${var.vpc_name}-ec2"
+    Name = "${var.vpc_name}-appconnector"
   }
 }
 
