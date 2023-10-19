@@ -69,7 +69,7 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
 
 locals {
   rule_orders = [
-    { id = zpa_policy_access_rule.windows_access_policy.id, order = 5 },
+    { id = zpa_policy_access_rule.windows_access_policy.id, order = 2 },
     { id = zpa_policy_access_rule.windows_access_policy.id, order = 3 }
   ]
 }
