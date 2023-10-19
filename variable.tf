@@ -9,6 +9,12 @@ variable "vpc_name" {
   type        = string
 }
 
+variable "tag" {
+  description = "タグ名"
+  type        = string
+　　　　default = var.vpc_name
+}
+
 variable "az1_name" {
   description = "一つ目のavailability zone"
   type        = string
