@@ -16,12 +16,12 @@ USERDATA
 module "cc_vm" {
   source                    = "./modules/terraform-zscc-ccvm-aws"
   cc_count                  = 1
-  ami_id                    = "ami-0854c366a1edc5c3a"
+  ami_id                    = var.cc_ami
   mgmt_subnet_id            = aws_subnet.private_subnet1.id
   service_subnet_id         = aws_subnet.private_subnet1.id
   instance_key              = "zsdemo"
   user_data                 = local.userdata
-  ccvm_instance_type        = "t3.medium"
+  ccvm_instance_type        = var.cc_instance_type
   iam_instance_profile      = module.cc_iam.iam_instance_profile_id
   mgmt_security_group_id    = aws_security_group.sg.id
   service_security_group_id = aws_security_group.sg.id
