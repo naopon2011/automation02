@@ -32,10 +32,10 @@ resource "zpa_application_segment" "windows" {
 
 // Create Server Group
 resource "zpa_server_group" "win_servers" {
-  name              = "Win Servers"
-  description       = "Win Servers"
+  name              = "Win Servers Group created by terraform"
+  description       = "Win Servers Group created by terraform"
   enabled           = true
-  dynamic_discovery = false
+  dynamic_discovery = true
   app_connector_groups {
     id = [data.zpa_app_connector_group.dc_connector_group.id]
   }
