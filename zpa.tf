@@ -69,16 +69,17 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
 
 locals {
   rule_orders = [
-    [ zpa_policy_access_rule.windows_access_policy.id, 2 ]
+    { id = zpa_policy_access_rule.windows_access_policy.id, order = 2 }
   ]
 }
 
 resource "zpa_policy_access_rule_reorder" "access_policy_reorder" {
   policy_type   = "ACCESS_POLICY"
   dynamic "rules" {
+    for_each = local.rule_orders
     content {
-      id    = rules[0]
-      order = rules[1]
+      id    = rules.value.id
+      order = rules.value.order
     }
   }
 }
