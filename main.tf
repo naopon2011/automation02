@@ -109,3 +109,14 @@ resource "aws_security_group" "sg" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
 }
+
+#Windows Serverの作成
+resource "aws_instance" "windows" {
+  ami           = var.win_ami
+  instance_type = var.win_instance_type
+  subnet_id = aws_subnet.private_subnet2.id
+  key_name = var.instance_key
+  tags = {
+    Name = "${var.vpc_name}-win"
+  }
+}
