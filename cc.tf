@@ -25,8 +25,6 @@ module "cc_vm" {
   iam_instance_profile      = module.cc_iam.iam_instance_profile_id
   mgmt_security_group_id    = aws_security_group.sg.id
   service_security_group_id = aws_security_group.sg.id
-  vpc                       = var.vpc_name
-  tag                       = var.tag
 }
 
 module "cc_iam" {
