@@ -12,6 +12,7 @@ variable "vpc_name" {
 variable "az1_name" {
   description = "一つ目のavailability zone"
   type        = string
+  default     = "ap-northeast-1a"
 }
 
 variable "provision_key" {
