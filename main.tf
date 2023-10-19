@@ -9,7 +9,7 @@ resource "aws_vpc" "vpc" {
     Name = var.vpc_name
   }
 }
-# パブリックサブネットタグ
+# パブリックサブネットの作成
 resource "aws_subnet" "public_subnet" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.0.0/24"
@@ -19,7 +19,7 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 
-# パブリックサブネット用ルートテーブルタグ
+# パブリックサブネット用ルートテーブルの作成
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.vpc.id
   tags = {
@@ -27,7 +27,7 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
-# プライベートサブネットタグ
+# プライベートサブネットの作成
 resource "aws_subnet" "private_subnet1" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.3.0/24"
@@ -45,7 +45,7 @@ resource "aws_subnet" "private_subnet2" {
   }
 }
 
-# インターネットゲートウェイタグ
+# インターネットゲートウェイの作成
 resource "aws_internet_gateway" "my_igw" {
   vpc_id = aws_vpc.vpc.id
   tags = {
@@ -60,7 +60,7 @@ resource "aws_route" "public_default_route" {
   gateway_id             = aws_internet_gateway.my_igw.id
 }
 
-#NATゲートウェイタグ
+#NATゲートウェイの作成
 resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public_subnet.id
@@ -69,7 +69,7 @@ resource "aws_nat_gateway" "nat_gateway" {
   }
 }
 
-# Elastic IPタグ
+# Elastic IPの作成
 resource "aws_eip" "eip" {
   vpc = true
   tags = {
@@ -83,6 +83,7 @@ resource "aws_route_table_association" "public_subnet_association" {
   route_table_id = aws_route_table.public_route_table.id
 }
 
+# プライベートサブネット用ルートテーブルの作成
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
   route {
@@ -91,6 +92,7 @@ resource "aws_route_table" "private_route_table" {
   }
 }
 
+# プライベートサブネットにルートテーブルを紐づける
 resource "aws_route_table_association" "private_subnet_association" {
   subnet_id      = aws_subnet.private_subnet1.id
   route_table_id = aws_route_table.private_route_table.id
