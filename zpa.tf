@@ -77,6 +77,7 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
       rhs = data.zpa_application_segment.win_seg.id
     }
   }
+}
 
 // Retrieve App Connector Group
 data "zpa_app_connector_group" "dc_connector_group" {
