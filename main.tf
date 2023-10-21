@@ -101,7 +101,7 @@ resource "aws_route_table" "private_route_table2" {
   vpc_id = aws_vpc.vpc.id
   route {
     cidr_block = "0.0.0.0/0"
-    network_instance_id = module.cc_vm.service_eni_1[0]
+    network_interface_id = module.cc_vm.service_eni_1[0]
   }
 }
 
