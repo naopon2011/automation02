@@ -24,6 +24,11 @@ resource "aws_instance" "cc_vm" {
   associate_public_ip_address = false
   user_data                   = base64encode(var.user_data)
 
+  tags = {
+    Name = var.vpc_name,
+    Tag = var.vpc_name
+  }
+
   metadata_options {
     http_endpoint = "enabled"
     http_tokens   = var.imdsv2_enabled ? "required" : "optional"
