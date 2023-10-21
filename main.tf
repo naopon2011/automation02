@@ -18,6 +18,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-public-subnet"
+    Tag = var.vpc_name
   }
 }
 
@@ -26,6 +27,7 @@ resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.vpc.id
   tags = {
     Name = "${var.vpc_name}-public-route-table"
+    Tag = var.vpc_name
   }
 }
 
@@ -36,6 +38,7 @@ resource "aws_subnet" "private_subnet1" {
   availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-private-subnet1"
+    Tag = var.vpc_name
   }
 }
 
@@ -46,6 +49,7 @@ resource "aws_subnet" "private_subnet2" {
   availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-private-subnet2"
+    Tag = var.vpc_name
   }
 }
 
@@ -54,6 +58,7 @@ resource "aws_internet_gateway" "my_igw" {
   vpc_id = aws_vpc.vpc.id
   tags = {
     Name = "${var.vpc_name}-igw"
+    Tag = var.vpc_name
   }
 }
 
@@ -70,6 +75,7 @@ resource "aws_nat_gateway" "nat_gateway" {
   subnet_id     = aws_subnet.public_subnet.id
   tags = {
     Name = "${var.vpc_name}-nat-gateway"
+    Tag = var.vpc_name
   }
 }
 
@@ -78,6 +84,7 @@ resource "aws_eip" "eip" {
   vpc = true
   tags = {
     Name = "${var.vpc_name}-eip"
+    Tag = var.vpc_name
   }
 }
 
@@ -94,6 +101,10 @@ resource "aws_route_table" "private_route_table" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_nat_gateway.nat_gateway.id
   }
+  tags = {
+    Name = "${var.vpc_name}-private_route_table"
+    Tag = var.vpc_name
+  }
 }
 
 # CC送信元用プライベートサブネットのルートテーブルの作成
@@ -102,6 +113,10 @@ resource "aws_route_table" "private_route_table2" {
   route {
     cidr_block = "0.0.0.0/0"
     network_interface_id = module.cc_vm.service_eni_1[0]
+  }
+  tags = {
+    Name = "${var.vpc_name}-private_route_table2"
+    Tag = var.vpc_name
   }
 }
 
@@ -114,7 +129,7 @@ resource "aws_route_table_association" "private_subnet_association" {
 # プライベートサブネットにルートテーブルを紐づける
 resource "aws_route_table_association" "private_subnet_association2" {
   subnet_id      = aws_subnet.private_subnet2.id
- route_table_id = aws_route_table.private_route_table2.id
+  route_table_id = aws_route_table.private_route_table2.id
 }
 
 resource "aws_security_group" "sg" {
@@ -136,5 +151,6 @@ resource "aws_instance" "windows" {
   key_name = var.instance_key
   tags = {
     Name = "${var.vpc_name}-win"
+    Tag = var.vpc_name
   }
 }
