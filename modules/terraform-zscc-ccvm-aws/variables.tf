@@ -33,6 +33,11 @@ variable "instance_key" {
   description = "SSH Key for instances"
 }
 
+variable "tag" {
+  type        = string
+  description = "tag"
+}
+
 variable "user_data" {
   type        = string
   description = "Cloud Init data"
