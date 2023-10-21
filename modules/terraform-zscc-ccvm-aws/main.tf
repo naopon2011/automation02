@@ -25,7 +25,7 @@ resource "aws_instance" "cc_vm" {
   user_data                   = base64encode(var.user_data)
 
   tags = {
-    Name = "${var.tag}-cc-${count.index}"
+    Name = "${var.tag}-cc${count.index}"
     Tag = var.tag
   }
 
