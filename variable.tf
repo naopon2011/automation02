@@ -56,6 +56,16 @@ variable "cc_instance_type" {
   default     = "t3.medium"
 }
 
+variable "zpa_client_id" {
+  type        = string
+  description = "Zscaler Private Access Client ID"
+}
+
+variable "zpa_client_id" {
+  type        = string
+  description = "Zscaler Private Access Client ID"
+}
+
 variable "provision_key" {
   description = "App Connector用のProvisioning Keyの名前"
   type        = string
