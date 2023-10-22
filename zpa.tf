@@ -86,7 +86,7 @@ resource "zpa_policy_access_rule" "windows_access_policy" {
 
 // Retrieve App Connector Group
 data "zpa_app_connector_group" "dc_connector_group" {
-  name = "test"
+  name = var.ac_group
 }
 
 data "zpa_policy_type" "access_policy" {
