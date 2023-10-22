@@ -61,11 +61,6 @@ variable "zpa_client_id" {
   description = "Zscaler Private Access Client ID"
 }
 
-variable "zpa_client_id" {
-  type        = string
-  description = "Zscaler Private Access Client ID"
-}
-
 variable "zpa_client_secret" {
   type        = string
   description = "Zscaler Private Access Secret ID"
@@ -74,6 +69,11 @@ variable "zpa_client_secret" {
 variable "zpa_customer_id" {
   type        = string
   description = "Zscaler Private Access Customer ID"
+}
+
+variable "ac_group" {
+  type        = string
+  description = "App Connector Groupの名前"
 }
 
 variable "provision_key" {
