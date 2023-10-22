@@ -5,6 +5,7 @@ provider "aws" {
 # VPCの作成
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
+  enabe_dns_hostnames = true
   tags = {
     Name = var.vpc_name,
     Tag = var.vpc_name
