@@ -8,9 +8,9 @@ terraform {
   }
 }
 provider "zpa" {
-  zpa_client_id         =  "MjE2MTk5NjIxMzY0NDE2OTEzLWU1M2ExZTAyLTZiMzgtNDE3ZC1hMzY1LWM5YjZkN2UxNGI4Ng=="
-  zpa_client_secret     =  "5X:/3WkjKAO?]<4T%!]`iD!9*SG.GkNl"
-  zpa_customer_id       =  "216199621364416512"
+  zpa_client_id         =  var.zpa_client_id
+  zpa_client_secret     =  var.zpa_client_secret
+  zpa_customer_id       =  var.zpa_customer_id 
 }
 
 // Create Application Segment
