@@ -59,11 +59,13 @@ variable "cc_instance_type" {
 variable "zpa_client_id" {
   type        = string
   description = "Zscaler Private Access Client ID"
+  sensitive   = true
 }
 
 variable "zpa_client_secret" {
   type        = string
   description = "Zscaler Private Access Secret ID"
+  sensitive   = true
 }
 
 variable "zpa_customer_id" {
