@@ -66,9 +66,9 @@ variable "zpa_client_secret" {
   description = "Zscaler Private Access Secret ID"
 }
 
-variable "zpa_customer_id" {
+variable "zpa_tenant_id" {
   type        = string
-  description = "Zscaler Private Access Customer ID"
+  description = "Zscaler Private Access Tenant ID"
 }
 
 variable "ac_group" {
