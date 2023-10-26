@@ -29,7 +29,7 @@ variable "win_ami" {
 variable "win_instance_type" {
   description = "Windows(踏み台用)のinstance type"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.medium"
 }
 
 variable "ac_ami" {
