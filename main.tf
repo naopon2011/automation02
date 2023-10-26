@@ -133,16 +133,16 @@ resource "aws_route_table_association" "private_subnet_association2" {
   route_table_id = aws_route_table.private_route_table2.id
 }
 
-#resource "aws_security_group" "sg" {
-#  # ... other configuration ...
-#
-#  egress {
-#    from_port        = 0
-#    to_port          = 0
-#    protocol         = "-1"
-#    cidr_blocks      = ["0.0.0.0/0"]
-#  }
-#}
+resource "aws_security_group" "sg" {
+  # ... other configuration ...
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+}
 
 #Windows Serverの作成
 resource "aws_instance" "windows" {
