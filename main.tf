@@ -72,10 +72,19 @@ resource "aws_route" "public_default_route" {
 
 #NATゲートウェイの作成
 resource "aws_nat_gateway" "nat_gateway" {
-  connectivity_type      = "private"
+  allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public_subnet.id
   tags = {
     Name = "${var.vpc_name}-nat-gateway"
+    Tag = var.vpc_name
+  }
+}
+
+# Elastic IPの作成
+resource "aws_eip" "eip" {
+  vpc = true
+  tags = {
+    Name = "${var.vpc_name}-eip"
     Tag = var.vpc_name
   }
 }
