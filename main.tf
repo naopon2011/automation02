@@ -43,7 +43,7 @@ resource "aws_subnet" "private_subnet1" {
   }
 }
 
-# CC送信元用プライベートサブネットの作成
+# Windows用プライベートサブネットの作成
 resource "aws_subnet" "private_subnet2" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.pri2_subnet_cidr
@@ -72,19 +72,9 @@ resource "aws_route" "public_default_route" {
 
 #NATゲートウェイの作成
 resource "aws_nat_gateway" "nat_gateway" {
-  allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public_subnet.id
   tags = {
     Name = "${var.vpc_name}-nat-gateway"
-    Tag = var.vpc_name
-  }
-}
-
-# Elastic IPの作成
-resource "aws_eip" "eip" {
-  vpc = true
-  tags = {
-    Name = "${var.vpc_name}-eip"
     Tag = var.vpc_name
   }
 }
@@ -108,12 +98,12 @@ resource "aws_route_table" "private_route_table" {
   }
 }
 
-# CC送信元用プライベートサブネットのルートテーブルの作成
+# Windows用プライベートサブネットのルートテーブルの作成
 resource "aws_route_table" "private_route_table2" {
   vpc_id = aws_vpc.vpc.id
   route {
     cidr_block = "0.0.0.0/0"
-    network_interface_id = module.cc_vm.service_eni_1[0]
+    gateway_id = aws_nat_gateway.nat_gateway.id
   }
   tags = {
     Name = "${var.vpc_name}-private_route_table2"
