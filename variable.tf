@@ -9,6 +9,12 @@ variable "vpc_name" {
   type        = string
 }
 
+variable "vpc_cidr" {
+  description = "VPCで使用するアドレス帯"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
 variable "az1_name" {
   description = "一つ目のavailability zone"
   type        = string
