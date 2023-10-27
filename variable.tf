@@ -15,6 +15,24 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
+variable "pub_sunet_cidr" {
+  description = "パブリックサブネットで使用するアドレス帯"
+  type        = string
+  default     = "10.0.0.0/24"
+}
+
+variable "pri1_sunet_cidr" {
+  description = "プライベートサブネット１で使用するアドレス帯"
+  type        = string
+  default     = "10.0.1.0/24"
+}
+
+variable "pri2_sunet_cidr" {
+  description = "プライベートサブネット2で使用するアドレス帯"
+  type        = string
+  default     = "10.0.2.0/24"
+}
+
 variable "az1_name" {
   description = "一つ目のavailability zone"
   type        = string
