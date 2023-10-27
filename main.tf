@@ -72,6 +72,7 @@ resource "aws_route" "public_default_route" {
 
 #NATゲートウェイの作成
 resource "aws_nat_gateway" "nat_gateway" {
+  connectivity_type      = "private"
   subnet_id     = aws_subnet.public_subnet.id
   tags = {
     Name = "${var.vpc_name}-nat-gateway"
