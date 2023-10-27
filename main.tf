@@ -15,7 +15,7 @@ resource "aws_vpc" "vpc" {
 # パブリックサブネットの作成
 resource "aws_subnet" "public_subnet" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = "10.0.0.0/24"
+  cidr_block        = var.pub_sunet_cidr
   availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-public-subnet"
