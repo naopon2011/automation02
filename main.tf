@@ -15,7 +15,7 @@ resource "aws_vpc" "vpc" {
 # パブリックサブネットの作成
 resource "aws_subnet" "public_subnet" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.pub_sunet_cidr
+  cidr_block        = var.pub_subnet_cidr
   availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-public-subnet"
@@ -35,7 +35,7 @@ resource "aws_route_table" "public_route_table" {
 # Zscalerリソース用プライベートサブネットの作成
 resource "aws_subnet" "private_subnet1" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = "10.0.3.0/24"
+  cidr_block        = var.pri1_subnet_cidr
   availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-private-subnet1"
@@ -46,7 +46,7 @@ resource "aws_subnet" "private_subnet1" {
 # CC送信元用プライベートサブネットの作成
 resource "aws_subnet" "private_subnet2" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = "10.0.4.0/24"
+  cidr_block        = var.pri2_subnet_cidr
   availability_zone = var.az1_name
   tags = {
     Name = "${var.vpc_name}-private-subnet2"
