@@ -82,7 +82,7 @@ resource "aws_nat_gateway" "nat_gateway" {
 
 # Elastic IPの作成
 resource "aws_eip" "eip" {
-  vpc = true
+  domain = "vpc"
   tags = {
     Name = "${var.vpc_name}-eip"
     Tag = var.vpc_name
