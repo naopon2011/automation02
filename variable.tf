@@ -47,13 +47,13 @@ variable "instance_key" {
 variable "win_ami" {
   description = "Windows(踏み台用)のami(踏み台用)"
   type        = string
-  default     = "ami-06323ff1c3178cee1"
+  default     = "ami-0962657fe505b0123"
 }
 
 variable "win_instance_type" {
   description = "Windows(踏み台用)のinstance type"
   type        = string
-  default     = "t3.medium"
+  default     = "t2.micro"
 }
 
 variable "ac_ami" {
